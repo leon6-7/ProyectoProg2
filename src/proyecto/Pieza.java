@@ -5,14 +5,21 @@ public abstract class Pieza {
     protected int vida;
     protected int ataque;
     protected int escudo;
-    protected boolean blanca;
+    protected boolean piezaColor; //true es blanco y false es negro
     protected boolean enrango;
+    protected EstadoPieza estado;
     public Pieza(int vida, int ataque, int escudo){
         this.vida=vida;
         this.ataque=ataque;
         this.escudo=escudo;
+        this.estado=EstadoPieza.CONVIDA;
     }
-
+    public void checkMuerte(){
+        if(vida<=0){
+            estado=EstadoPieza.CAPTURADA;
+        }          
+    }
+    
     public int getVida() {
         return vida;
     }
@@ -22,17 +29,17 @@ public abstract class Pieza {
     }
 
     public boolean color() {
-        return blanca;
+        return piezaColor;
     }
     public boolean rango(){
         return enrango;
     }
     public void setBlanco(){
-        blanca = true;
+        piezaColor = true;
     }
     
     public void setNegro(){
-        blanca = false;
+        piezaColor = false;
     }
     
     public void ataque(Pieza target){

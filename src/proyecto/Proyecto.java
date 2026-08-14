@@ -1,10 +1,13 @@
 
 package proyecto;
+import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 public class Proyecto extends JFrame {
     private JPanel escena1;
+    public Font def = new Font("MS Gothic", Font.BOLD,20);
+
     public Proyecto(){
         setSize(1000,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,7 +22,6 @@ public class Proyecto extends JFrame {
         escena1 = newScene;
         add(escena1);
         
-        // Refresh the UI layout
         revalidate();
         repaint();
     }
