@@ -1,20 +1,23 @@
+
 package proyecto;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import java.awt.Dimension;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPanel;
 
-public class Cuenta extends JPanel{
-    public Font def = new Font("MS Gothic", Font.BOLD,20);
+public class CrearCuenta extends JPanel{
+private static Map<String, String> listadoCuentas = new HashMap<>();
+private Font def = new Font("MS Gothic", Font.BOLD,20);
 
-    public Cuenta(Proyecto Ventana){
+public CrearCuenta(Proyecto ventana){
+
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
    
     //
@@ -41,18 +44,27 @@ public class Cuenta extends JPanel{
     contra.setFont(def);
     contra.setAlignmentX(Component.CENTER_ALIGNMENT);
     
+    //Label de confirmacion
+    JLabel conf = new JLabel("");
+    conf.setMaximumSize(new Dimension(400,50));
+    conf.setPreferredSize(new Dimension(300, 50));
+    conf.setFont(def);
+    conf.setAlignmentX(Component.CENTER_ALIGNMENT);
+    conf.setVisible(false);
     //boton enviar datos
     JButton enviar = new JButton("Enviar");
     enviar.setMaximumSize(new Dimension(400,50));
     enviar.setPreferredSize(new Dimension(300, 50));
     enviar.setFont(def);
     enviar.setAlignmentX(Component.CENTER_ALIGNMENT);
-    enviar.addActionListener(e->{
-            if(iniciarSesion(contra.getText(), nombre.getText())){
-                Ventana.cambiarEscena(new Menu(Ventana, nombre.getText()));
-            }
+    enviar.addActionListener(e->    {
+            if(agregarCuenta(contra.getText(), nombre.getText(), conf))
+            {
+        ventana.cambiarEscena(new Menu(ventana));
             
-            });
+            
+        }else{conf.setVisible(true);}});
+    
     
     this.add(Box.createRigidArea(new Dimension(0,100)));
     this.add(dispNombre);
@@ -62,25 +74,31 @@ public class Cuenta extends JPanel{
     this.add(dispContra);
     this.add(Box.createRigidArea(new Dimension(0,50)));
     this.add(contra);
-    this.add(Box.createRigidArea(new Dimension(0,100)));
+    this.add(Box.createRigidArea(new Dimension(0,50)));
     this.add(enviar);
-    add(Box.createVerticalGlue());
+    this.add(Box.createRigidArea(new Dimension(0,50)));
+    this.add(conf);
 
-            
-        
-    
+    add(Box.createVerticalGlue());
+}   
+
+
+public boolean agregarCuenta(String contra, String nombre, JLabel conf){
+    for(String nom: listadoCuentas.values()){
+        if(nom.contentEquals(nombre)){        
+            conf.setText("Nombre ya existente");
+           return false;
+        }   
     }
-    
-    public boolean iniciarSesion(String contra, String nombre){
-        Map<String, String> listadoCuentas = CrearCuenta.getListadoCuentas();
-        
-        for(Map.Entry<String, String> nom: listadoCuentas.entrySet()){
-            String n=nom.getValue();
-            String c=nom.getKey();
-            if(n.equals(nombre)&&c.equals(contra)){
-                return true;
-            }
-        }
-        return false;
+    System.out.println("Cuenta añadida correctamente");
+    listadoCuentas.put(contra,nombre);
+    conf.setText("Cuenta añadida correctamente");
+    return true;
 }
+
+public static Map<String, String> getListadoCuentas() {
+        return listadoCuentas;
+}
+
+
 }

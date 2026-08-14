@@ -1,5 +1,5 @@
 
-package proyecto;
+package proyecto.Piezas;
 
 public class Vampiro extends Pieza{
     
