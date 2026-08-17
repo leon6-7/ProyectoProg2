@@ -7,7 +7,7 @@ public class Zombie extends Pieza {
         vida = 1;
         escudo = 0;
         ataque = 1;
-        ruta = "C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\zombie_w.png";
+        ruta = "/Imagenes/zombie_w.png";
     }
 
     @Override

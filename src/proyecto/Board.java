@@ -49,9 +49,9 @@ public class Board extends JPanel {
         turno.setFont(new Font("MS Gothic",Font.BOLD,17));
         resultado.setFont(new Font("MS Gothic",Font.BOLD,15));
         String[] nombres={"Necromante","Hombre Lobo","Vampiro"};
-        String[] rutas={"C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\necromancer.png",
-            "C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\werewolf.png",
-            "C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\vampire.png"};
+        String[] rutas={"/Imagenes/necromancer.png",
+            "/Imagenes/werewolf.png",
+            "/Imagenes/vampire.png"};
         ruleta=new Ruleta(nombres,rutas);
         ruleta.setRuletaListener((indice,nombre)->{
             if(tienePiezaDelTipo(nombre)){
@@ -179,10 +179,10 @@ public class Board extends JPanel {
         else if(p instanceof Vampiro)n="vampire";
         else if(p.getTipo().equals("Hombre Lobo"))n="werewolf";
         else n="zombie";
-        return "Imagenes/"+n+(p.color()?"_w":"")+".png";
+        return "/Imagenes/"+n+(p.color()?"_w":"")+".png";
     }
 
-    private Image escalar(String ruta,int tam){return new ImageIcon(ruta).getImage().getScaledInstance(tam,tam,Image.SCALE_SMOOTH);
+    private Image escalar(String ruta,int tam){return new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(tam,tam,Image.SCALE_SMOOTH);
     }
 
     private void resaltar(int f,int c){limpiarMarcadores();

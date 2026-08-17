@@ -18,7 +18,7 @@ public class Ruleta extends JPanel {
     public Ruleta(String[] nombres,String[] rutasImagenes){
         this.nombres=nombres;
         iconos=new ImageIcon[rutasImagenes.length];
-        for(int i=0;i<rutasImagenes.length;i++){Image im=new ImageIcon(rutasImagenes[i]).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        for(int i=0;i<rutasImagenes.length;i++){Image im=new ImageIcon(getClass().getResource(rutasImagenes[i])).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
             iconos[i]=new ImageIcon(im);
         }
         setLayout(new BorderLayout());

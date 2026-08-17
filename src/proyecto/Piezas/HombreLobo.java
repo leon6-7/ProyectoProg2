@@ -7,7 +7,7 @@ public class HombreLobo extends Pieza {
         ataque = 5;
         vida = 4;
         escudo = 4;
-        ruta = ("C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\werewolf_w.png");
+        ruta = ("/Imagenes/werewolf_w.png");
     }
 
     @Override

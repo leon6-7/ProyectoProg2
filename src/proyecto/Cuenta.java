@@ -60,6 +60,6 @@ public class Cuenta extends JPanel {
             setAlignmentX(CENTER_ALIGNMENT);
         }}
     @Override protected void paintComponent(Graphics g){super.paintComponent(g);
-        g.drawImage(new ImageIcon("C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\bg.png").getImage(),0,0,getWidth(),getHeight(),this);
+        g.drawImage(new ImageIcon(getClass().getResource("/Imagenes/bg.png")).getImage(),0,0,getWidth(),getHeight(),this);
     }
 }

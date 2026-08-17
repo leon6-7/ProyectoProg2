@@ -7,7 +7,7 @@ public class Vampiro extends Pieza {
         ataque = 3;
         vida = 4;
         escudo = 5;
-        ruta = "C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\vampire_w.png";
+        ruta = "/Imagenes/vampire_w.png";
     }
 
     @Override

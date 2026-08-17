@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Menu extends JPanel {
     private final Font def=new Font("MS Gothic",Font.BOLD,20);
     private final Font tit=new Font("Vivaldi",Font.BOLD,65);
-    private final Image fondo=new ImageIcon("C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\bg.png").getImage();
+    private final Image fondo=new ImageIcon(getClass().getResource("/Imagenes/bg.png")).getImage();
 
     public Menu(Proyecto ventana){
         setLayout(null);

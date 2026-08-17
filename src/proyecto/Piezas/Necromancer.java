@@ -7,7 +7,7 @@ public class Necromancer extends Pieza {
         ataque = 4;
         vida = 3;
         escudo = 1;
-        ruta = "C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\necromancer_w.png";
+        ruta = "/Imagenes/necromancer_w.png";
     }
 
     

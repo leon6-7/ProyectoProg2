@@ -6,7 +6,7 @@ import javax.swing.*;
 public class CrearCuenta extends JPanel {
     private final Proyecto ventana;
     private final Font def=new Font("MS Gothic",Font.BOLD,20);
-    private final Image fondo=new ImageIcon("C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\bg.png").getImage();
+    private final Image fondo=new ImageIcon(getClass().getResource("/Imagenes/bg.png")).getImage();
 
     public CrearCuenta(Proyecto ventana){
         this.ventana=ventana;
