@@ -164,6 +164,8 @@ public class Board extends JPanel {
             Pieza p=partida.getTablero()[f][c];
             if(p!=null&&p.estaViva()){JLabel l=new JLabel(new ImageIcon(escalar(imagenPieza(p),80)));
                 l.setHorizontalAlignment(SwingConstants.CENTER);
+                final int ff=f,cc=c;
+                l.addMouseListener(new MouseAdapter(){@Override public void mouseClicked(MouseEvent e){clickCasilla(ff,cc);}});
                 iconos[f][c]=l;
                 squares[f][c].add(l,BorderLayout.CENTER);
             }squares[f][c].revalidate();
