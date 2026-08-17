@@ -1,86 +1,65 @@
 package proyecto;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import java.awt.Dimension;
-import java.awt.Component;
-import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Cuenta extends JPanel{
-    public Font def = new Font("MS Gothic", Font.BOLD,20);
+import java.awt.*;
+import javax.swing.*;
 
-    public Cuenta(Proyecto Ventana){
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-   
-    //
-    JLabel dispNombre = new JLabel("NOMBRE");
-    dispNombre.setFont(def);
-    dispNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
-    
-    //Textfield de nombre
-    JTextField nombre = new JTextField(12);
-    nombre.setMaximumSize(new Dimension(400,50));
-    nombre.setPreferredSize(new Dimension(200, 50));
-    nombre.setFont(def);
-    nombre.setAlignmentX(Component.CENTER_ALIGNMENT);
-    
-   //
-    JLabel dispContra = new JLabel("Contraseña");
-    dispContra.setFont(def);
-    dispContra.setAlignmentX(Component.CENTER_ALIGNMENT);
-    
-   //Textfield de contra
-    JTextField contra = new JTextField(10);
-    contra.setMaximumSize(new Dimension(400,50));
-    contra.setPreferredSize(new Dimension(200, 50));
-    contra.setFont(def);
-    contra.setAlignmentX(Component.CENTER_ALIGNMENT);
-    
-    //boton enviar datos
-    JButton enviar = new JButton("Enviar");
-    enviar.setMaximumSize(new Dimension(400,50));
-    enviar.setPreferredSize(new Dimension(300, 50));
-    enviar.setFont(def);
-    enviar.setAlignmentX(Component.CENTER_ALIGNMENT);
-    enviar.addActionListener(e->{
-            if(iniciarSesion(contra.getText(), nombre.getText())){
-                Ventana.cambiarEscena(new Menu(Ventana, nombre.getText()));
+public class Cuenta extends JPanel {
+    private final Proyecto ventana;
+    private final Font def=new Font("MS Gothic",Font.BOLD,20);
+
+    public Cuenta(Proyecto ventana){
+        this.ventana=ventana;
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        JLabel titulo=new JLabel("INICIAR SESION");
+        titulo.setFont(def);
+        titulo.setForeground(Color.WHITE);
+        titulo.setAlignmentX(CENTER_ALIGNMENT);
+        JTextField nombre=new JTextField();
+        nombre.setMaximumSize(new Dimension(400,45));
+        nombre.setFont(def);
+        JPasswordField contra=new JPasswordField();
+        contra.setMaximumSize(new Dimension(400,45));
+        contra.setFont(def);
+        JLabel mensaje=new JLabel(" ");
+        mensaje.setFont(def);
+        mensaje.setForeground(Color.WHITE);
+        mensaje.setAlignmentX(CENTER_ALIGNMENT);
+        JButton entrar=new JButton("Entrar");
+        entrar.setFont(def);
+        entrar.setAlignmentX(CENTER_ALIGNMENT);
+        entrar.addActionListener(e->{
+            Jugador j=ventana.getJugadores().buscar(nombre.getText().trim());
+            if(j!=null&&j.isActivo()&&j.getContrasena().equals(new String(contra.getPassword()))){ventana.setJugadorSesion(j);
+                ventana.cambiarEscena(new Menu(ventana,j));
             }
-            
-            });
-    
-    this.add(Box.createRigidArea(new Dimension(0,100)));
-    this.add(dispNombre);
-    this.add(Box.createRigidArea(new Dimension(0,50)));
-    this.add(nombre);
-    this.add(Box.createRigidArea(new Dimension(0,50)));
-    this.add(dispContra);
-    this.add(Box.createRigidArea(new Dimension(0,50)));
-    this.add(contra);
-    this.add(Box.createRigidArea(new Dimension(0,100)));
-    this.add(enviar);
-    add(Box.createVerticalGlue());
-
-            
-        
-    
+            else mensaje.setText("Usuario o contraseña incorrectos.");
+        });
+        JButton salir=new JButton("Salir");
+        salir.setFont(def);
+        salir.setAlignmentX(CENTER_ALIGNMENT);
+        salir.addActionListener(e->ventana.cambiarEscena(new Menu(ventana)));
+        add(Box.createVerticalStrut(70));
+        add(titulo);
+        add(Box.createVerticalStrut(35));
+        add(new JLabelBlanco("NOMBRE",def));
+        add(nombre);
+        add(Box.createVerticalStrut(25));
+        add(new JLabelBlanco("CONTRASEÑA",def));
+        add(contra);
+        add(Box.createVerticalStrut(30));
+        add(mensaje);
+        add(entrar);
+        add(Box.createVerticalStrut(15));
+        add(salir);
+        add(Box.createVerticalGlue());
     }
-    
-    public boolean iniciarSesion(String contra, String nombre){
-        Map<String, String> listadoCuentas = CrearCuenta.getListadoCuentas();
-        
-        for(Map.Entry<String, String> nom: listadoCuentas.entrySet()){
-            String n=nom.getValue();
-            String c=nom.getKey();
-            if(n.equals(nombre)&&c.equals(contra)){
-                return true;
-            }
-        }
-        return false;
-}
+
+    private static class JLabelBlanco extends JLabel{JLabelBlanco(String s,Font f){super(s);
+            setFont(f);
+            setForeground(Color.WHITE);
+            setAlignmentX(CENTER_ALIGNMENT);
+        }}
+    @Override protected void paintComponent(Graphics g){super.paintComponent(g);
+        g.drawImage(new ImageIcon("C:\\Proyectos\\Programacion\\ProyectoProg2\\Proyecto\\src\\Imagenes\\bg.png").getImage(),0,0,getWidth(),getHeight(),this);
+    }
 }
